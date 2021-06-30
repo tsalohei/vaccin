@@ -1,15 +1,78 @@
 const express = require('express')
 const app = express()
+const fs = require('fs')
 
-let antiqua = [
-    {"id":"6da3a8cf-c923-4c77-8f80-c69c935fe1df","orderNumber":1,"responsiblePerson":"Joonatan Siloma","healthCareDistrict":"KYS","vaccine":"Antiqua","injections":4,"arrived":"2021-01-11T08:59:28.642790Z"},
-    {"id":"1251aa6c-ebaf-4e33-89d3-d6f210497b94","orderNumber":2,"responsiblePerson":"Tarvo Puro","healthCareDistrict":"TAYS","vaccine":"Antiqua","injections":4,"arrived":"2021-01-10T01:29:26.642846Z"},
-    {"id":"c00e2610-5bd9-4f84-9597-1e7febfae62c","orderNumber":4,"responsiblePerson":"Linda Väisälä","healthCareDistrict":"HYKS","vaccine":"Antiqua","injections":4,"arrived":"2021-01-08T05:33:37.642901Z"},
-    {"id":"e8de1bb1-490c-48b7-bddd-c4b6d4ed835c","orderNumber":5,"responsiblePerson":"Alfred Kalliala","healthCareDistrict":"TAYS","vaccine":"Antiqua","injections":4,"arrived":"2021-01-27T16:02:09.642922Z"},
-    {"id":"6f4dac20-374e-42d5-9403-f4e0c8e7bedb","orderNumber":8,"responsiblePerson":"Miikka Kulomäki","healthCareDistrict":"HYKS","vaccine":"Antiqua","injections":4,"arrived":"2021-03-05T03:51:27.643049Z"},
-    {"id":"b546d626-5d04-485d-856c-6d57ea3ae74a","orderNumber":10,"responsiblePerson":"Lempi Särkilahti","healthCareDistrict":"KYS","vaccine":"Antiqua","injections":4,"arrived":"2021-03-04T08:36:44.643107Z"},
-    {"id":"37940c46-8016-45f6-b02c-9480ea78d88b","orderNumber":11,"responsiblePerson":"Kaappo Kuusisto","healthCareDistrict":"HYKS","vaccine":"Antiqua","injections":4,"arrived":"2021-01-06T02:53:22.643128Z"}
-]
+//database stuff
+const { Sequelize } = require('sequelize')
+const order = require('./models/orders')
+const db = {}
+const sequelize = new Sequelize('postgres://user:example@localhost:5432/user')
+
+
+const connectDb = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+      } catch (error) {
+        console.error('Unable to connect to the database:', error);
+      }    
+}
+connectDb()
+
+db.sequelize = sequelize
+db.Sequelize = Sequelize
+
+db.orders = require('./models/orders')(sequelize, Sequelize)
+db.vaccinations = require('./models/vaccinations')(sequelize, Sequelize)
+
+
+const parseOrder = (entry) => {   
+    const newOrder = db.orders.build({ id: entry.id, orderNumber: entry.orderNumber, 
+        healthCareDistrict: entry.healthCareDistrict, responsiblePerson: entry.responsiblePerson,
+        injections: entry.injections, arrived: entry.arrived, vaccine: entry.vaccine
+    })
+    /*
+    console.log(newOrder instanceof db.orders); // true
+    console.log(newOrder.id)
+    console.log(newOrder.orderNumber)
+    console.log(newOrder.healthCareDistrict)
+    console.log(newOrder.responsiblePerson)
+    console.log(newOrder.injections)
+    console.log(newOrder.arrived)
+    console.log(newOrder.vaccine)
+    */
+
+}
+
+const parseVaccination = (entry) => {
+    const newVaccination = db.vaccinations.build({ id: entry['vaccination-id'], gender: entry.gender, 
+        sourceBottle: entry.sourceBottle, injected: entry.vaccinationDate })
+    /*   
+    console.log(newVaccination.id)
+    console.log(newVaccination.gender)
+    console.log(newVaccination.sourceBottle)
+    console.log(newVaccination.injected)
+    */
+}
+
+if (process.argv.length > 3) {
+    console.log(`Parsing ${process.argv[3]}`)
+
+    const rawData = fs.readFileSync(process.argv[3], 'utf-8')
+    const jsonArray = rawData.split("\n").map(line => {
+        console.log('input ' + line)
+        return JSON.parse(line)
+    })
+    console.log(`Parsed ${jsonArray.length} entries`)
+
+    jsonArray.forEach(entry => {
+        if (process.argv[2] === 'order') {
+            parseOrder(entry);
+        } else if (process.argv[2] === 'vaccination') {
+            parseVaccination(entry);
+        }
+    });
+}
 
 
 app.get('/', (request, response) => {
@@ -17,7 +80,7 @@ app.get('/', (request, response) => {
 })
 
 app.get('/api/antiqua', (request, response) => {
-  response.json(antiqua)
+  //response.json(antiqua)
 })
 
 const unknownEndpoint = (request, response, next) => {
