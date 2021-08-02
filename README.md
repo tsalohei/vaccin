@@ -41,4 +41,4 @@ Close the database using:
 
 `docker-compose down`
 
-Frontend and backend can be stopped with Ctrl+C. Note that the database needs to be re-initialized if the program is closed.
+Frontend and backend can be stopped with Ctrl+c. Note that the database needs to be re-initialized if the program is closed.
