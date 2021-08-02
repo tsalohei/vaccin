@@ -1,9 +1,9 @@
 # Vaccine application
 
 ## Technology choices
-- React, JS
-- Node
-- Postgresql with Docker
+- React
+- Node.js, Express.js
+- PostgreSQL with Docker
 
 ## Development environment
 
@@ -21,7 +21,7 @@ Start Postgres database server in Docker by running the following command at the
 
 `docker-compose up`
 
-Open another tab in your terminal and initialize database with the resource files that are located by running the following commands in the **backend catalogue**. Type Ctrl+c after each.
+Open another tab in your terminal and initialize database with the resource files that come with the project by running the following commands in the **backend catalogue**. Type Ctrl+c after each.
 
 `npm run dev order antiqua.source` 
 
