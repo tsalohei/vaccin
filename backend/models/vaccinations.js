@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('vaccination', {
+    return sequelize.define('vaccinations', {
       id: {
         type: DataTypes.UUID,
         primaryKey: true
@@ -11,11 +11,3 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     })
 }
-
-/*
-{
-  "vaccination-id": "universal identifier of the vaccination",
-  "gender": "male|female|nonbinary",
-  "sourceBottle": "universal identifier of the bottle",
-  "injected": "Datetime"
-}*/

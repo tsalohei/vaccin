@@ -2,9 +2,8 @@ const express = require('express')
 const app = express()
 const fs = require('fs')
 
-//database stuff
 const { Sequelize } = require('sequelize')
-const order = require('./models/orders')
+const orders = require('./models/orders')
 const db = {}
 const sequelize = new Sequelize('postgres://user:example@localhost:5432/user')
 
@@ -13,9 +12,9 @@ const connectDb = async () => {
     try {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
-      } catch (error) {
+    } catch (error) {
         console.error('Unable to connect to the database:', error);
-      }    
+    }    
 }
 connectDb()
 
@@ -25,34 +24,28 @@ db.Sequelize = Sequelize
 db.orders = require('./models/orders')(sequelize, Sequelize)
 db.vaccinations = require('./models/vaccinations')(sequelize, Sequelize)
 
-
-const parseOrder = (entry) => {   
-    const newOrder = db.orders.build({ id: entry.id, orderNumber: entry.orderNumber, 
-        healthCareDistrict: entry.healthCareDistrict, responsiblePerson: entry.responsiblePerson,
-        injections: entry.injections, arrived: entry.arrived, vaccine: entry.vaccine
-    })
-    /*
-    console.log(newOrder instanceof db.orders); // true
-    console.log(newOrder.id)
-    console.log(newOrder.orderNumber)
-    console.log(newOrder.healthCareDistrict)
-    console.log(newOrder.responsiblePerson)
-    console.log(newOrder.injections)
-    console.log(newOrder.arrived)
-    console.log(newOrder.vaccine)
-    */
-
+const parseOrder = async (entry) => {
+    await db.orders.sync()
+    
+    try {
+      db.orders.create({ id: entry.id, orderNumber: entry.orderNumber, 
+            healthCareDistrict: entry.healthCareDistrict, responsiblePerson: entry.responsiblePerson,
+            injections: entry.injections, arrived: entry.arrived, vaccine: entry.vaccine })
+        
+    } catch (error) {
+        console.error('Unable to save order data', error)
+    }
 }
 
-const parseVaccination = (entry) => {
-    const newVaccination = db.vaccinations.build({ id: entry['vaccination-id'], gender: entry.gender, 
+const parseVaccination = async (entry) => {
+    await db.vaccinations.sync()
+
+    try {
+        db.vaccinations.create({ id: entry['vaccination-id'], gender: entry.gender, 
         sourceBottle: entry.sourceBottle, injected: entry.vaccinationDate })
-    /*   
-    console.log(newVaccination.id)
-    console.log(newVaccination.gender)
-    console.log(newVaccination.sourceBottle)
-    console.log(newVaccination.injected)
-    */
+    } catch (error) {
+        console.error('Unable to save vaccination data', error)
+    }
 }
 
 if (process.argv.length > 3) {
@@ -71,23 +64,20 @@ if (process.argv.length > 3) {
         } else if (process.argv[2] === 'vaccination') {
             parseVaccination(entry);
         }
-    });
+    })
 }
 
+//module.exports = db
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World</h1>')
 })
 
-app.get('/api/antiqua', (request, response) => {
-  //response.json(antiqua)
-})
-
 const unknownEndpoint = (request, response, next) => {
     response.status(404).send({ error: 'unknown endpoint' })
-  }
-  
-  app.use(unknownEndpoint)
+}  
+
+app.use(unknownEndpoint)
 
 const PORT = 3001
 app.listen(PORT, () => {
