@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const fs = require('fs')
+const { identity } = require('lodash')
 
 const { Sequelize } = require('sequelize')
 const orders = require('./models/orders')
@@ -38,19 +39,16 @@ const parseOrder = async (data) => {
     
 }
 
-const parseVaccination = async (entry) => {
+const parseVaccination = async (data) => {
     
-    /*
     await db.vaccinations.sync()
 
-      
     try {
-        db.vaccinations.create({ id: entry['vaccination-id'], gender: entry.gender, 
-        sourceBottle: entry.sourceBottle, injected: entry.vaccinationDate })
+        db.vaccinations.bulkCreate(data)
     } catch (error) {
         console.error('Unable to save vaccination data', error)
     }
-    */
+    
 }
 
 if (process.argv.length > 3) {
@@ -63,37 +61,29 @@ if (process.argv.length > 3) {
     })
     console.log(`Parsed ${jsonArray.length} entries`)
 
-    /*
-    i = 0;
-    for (const entry of jsonArray) {    
-        if (process.argv[2] === 'order') {
-            parseOrder(entry);
-        } else if (process.argv[2] === 'vaccination') {
-            parseVaccination(entry);
-        }
-        i++;
-        if (i > 1) {
-            console.log('NYT TULI BREAK VASTAAN!!!!')
-            break;
-        }
+    if (process.argv[2] === 'order') {
+        parseOrder(jsonArray)
+    } else if (process.argv[2] === 'vaccination') {  
+
+        const newJsonArray = jsonArray.map(({
+            ['vaccination-id']: id,
+            ...rest
+        }) => ({
+            id,
+            ...rest
+        }))  
+        
+        const anotherJsonArray = newJsonArray.map(({
+            vaccinationDate: injected,
+            ...rest
+        }) => ({
+            injected,
+            ...rest
+        }))  
+
+        parseVaccination(anotherJsonArray);
     }
-    */
-   /*
-   //KOKEILLAAN KÄSITELLÄ VAIN EKA RIVI JSONARRAYSTÄ
-   
-   if (process.argv[2] === 'order') {
-    parseOrder(jsonArray[0])
-    //parseOrder(jsonArray[1])
 
-   } 
-   console.log('ARRAYN EKA RIVI')
-   console.log(jsonArray[0])
-   //console.log(jsonArray[1])
-   */
- 
-    parseOrder(jsonArray)
-
-  
 }
 
 

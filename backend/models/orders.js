@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
         id: {
             type: DataTypes.UUID,
             primaryKey: true
-            //,autoIncrement: false
         },  
         healthCareDistrict: DataTypes.STRING, 
         orderNumber: DataTypes.INTEGER,
