@@ -1,20 +1,16 @@
-const express = require('express')
-const app = express()
+const app = require('./app')
 const fs = require('fs')
-const { identity } = require('lodash')
-
 const { Sequelize } = require('sequelize')
-const orders = require('./models/orders')
+
 const db = {}
 const sequelize = new Sequelize('postgres://user:example@localhost:5432/user')
-
 
 const connectDb = async () => {
     try {
         await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
+        console.log('Connection has been established successfully.')
     } catch (error) {
-        console.error('Unable to connect to the database:', error);
+        console.error('Unable to connect to the database:', error)
     }    
 }
 connectDb()
@@ -26,7 +22,7 @@ db.orders = require('./models/orders')(sequelize, Sequelize)
 db.vaccinations = require('./models/vaccinations')(sequelize, Sequelize)
 
 const parseOrder = async (data) => {
-    
+       
     await db.orders.sync()
 
     try {     
@@ -83,20 +79,7 @@ if (process.argv.length > 3) {
 
         parseVaccination(anotherJsonArray);
     }
-
 }
-
-
-app.get('/', (request, response) => {
- 
-  response.send('<h1>Hello World</h1>')
-})
-
-const unknownEndpoint = (request, response, next) => {
-    response.status(404).send({ error: 'unknown endpoint' })
-}  
-
-app.use(unknownEndpoint)
 
 const PORT = 3001
 app.listen(PORT, () => {
