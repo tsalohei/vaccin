@@ -23,9 +23,7 @@ Start Postgres database server in Docker by running the following command at the
 
 `docker-compose up`
 
-Now switch to the tab where you have the **backend catalogue** open. Initialize the database with the resource files that come with the project by using the following commands: 
-
-Type Ctrl+c after each command when data has finished downloading and move on to the next command.
+Now switch to the tab where you have the **backend catalogue** open. Initialize the database with the resource files that come with the project by using the commands below. Type Ctrl+c after each command when data has finished downloading and move on to the next command.
 
 `npm run fill-db order antiqua.source` (Ctrl+c)
 
