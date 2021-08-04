@@ -1,16 +1,18 @@
-const db = require('../index')
-//const { Sequelize } = require('../models') 
+const db = require('../models')
 
 const all_orders = db.orders
-//const all_vaccinations = db.vaccinations
+const all_vaccinations = db.vaccinations
 
-/*
 const findAllOrders = async () => {
     const orders = await all_orders.findAll()
     return orders
 }
 
-module.exports = {
-    findAllOrders
+const findAllVaccinations = async () => {
+    const vaccinations = await all_vaccinations.findAll()
+    return vaccinations
 }
-*/
+module.exports = {
+    findAllOrders,
+    findAllVaccinations
+}
