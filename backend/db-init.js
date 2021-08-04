@@ -1,27 +1,6 @@
-console.log('HALLOOTA HALLOO VAAN')
-
-
 const fs = require('fs')
 const { Sequelize } = require('sequelize')
-
-const db = {}
-const sequelize = new Sequelize('postgres://user:example@localhost:5432/user')
-
-const connectDb = async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.')
-    } catch (error) {
-        console.error('Unable to connect to the database:', error)
-    }    
-}
-connectDb()
-
-db.sequelize = sequelize
-db.Sequelize = Sequelize
-
-db.orders = require('./models/orders')(sequelize, Sequelize)
-db.vaccinations = require('./models/vaccinations')(sequelize, Sequelize)
+const db = require('./models')
 
 const parseOrder = async (data) => {
        
@@ -82,5 +61,3 @@ if (process.argv.length > 3) {
         parseVaccination(anotherJsonArray);
     }
 }
-
-//module.exports = db
