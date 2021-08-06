@@ -5,14 +5,18 @@ import App from './App'
 
 describe('App', () => {
 
-    test('renders header', () => {
+    test('renders header', async () => {
       const component = render(<App />)
   
       expect(component.container).toHaveTextContent(
         'Vaccine orders and vaccinations')
 
       expect(component.container).toHaveTextContent(
-        'Total amount of orders'
-      )
+        'Total amount of orders (bottles)'
+      )  
+      
+      expect(component.container).toHaveTextContent(
+        'Total amount of vaccinations'
+      )  
     })
 })

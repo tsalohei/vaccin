@@ -1,18 +1,18 @@
 const controller = require('../controllers/controller')
 
 jest.mock('../models/orders', () => () => {
-    const SequelizeMock = require('sequelize-mock')
-    const dbMock = new SequelizeMock()
+  const SequelizeMock = require('sequelize-mock')
+  const dbMock = new SequelizeMock()
   
-    return dbMock.define('orders', {
-      id: 'd9dd7031-cacf-44db-ae70-53f5548d3615',
-      healthCareDistrict: 'TYKS', 
-      orderNumber: 456,
-      responsiblePerson: 'Lumi Virta', 
-      injections: 3,
-      arrived: '2021-04-08T07:17:53.696013Z',
-      vaccine: 'antiqua'
-    })
+  return dbMock.define('orders', {
+    id: 'd9dd7031-cacf-44db-ae70-53f5548d3615',
+    healthCareDistrict: 'TYKS', 
+    orderNumber: 456,
+    responsiblePerson: 'Lumi Virta', 
+    injections: 3,
+    arrived: '2021-04-08T07:17:53.696013Z',
+    vaccine: 'antiqua'
+  })
 })
 
 describe('orders', () => {
@@ -20,5 +20,25 @@ describe('orders', () => {
     const orders = await controller.findAllOrders()
     expect(orders.length).toEqual(1)
     expect(orders[0].responsiblePerson).toEqual('Lumi Virta')
+  })
+})  
+
+jest.mock('../models/vaccinations', () => () => {
+  const SequelizeMock = require('sequelize-mock')
+  const dbMock = new SequelizeMock()
+
+  return dbMock.define('vaccinations', {
+    id: 'e01dda3a-9fe6-4ac5-8b81-f3e0d4c3cf84',
+    gender: 'female',
+    sourceBottle: '5065f281-da69-46ef-b491-ff5eaf7b5642',
+    injected: '2021-01-26T01:13:19.701415Z'
+  })
+})
+
+describe('vaccinations', () => {
+  it('can be found from database', async () => {
+    const vaccinations = await controller.findAllVaccinations()
+    expect(vaccinations.length).toEqual(1)
+    expect(vaccinations[0].injected).toEqual('2021-01-26T01:13:19.701415Z')
   })
 })  
