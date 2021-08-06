@@ -5,12 +5,12 @@ jest.mock('../models/orders', () => () => {
     const dbMock = new SequelizeMock()
   
     return dbMock.define('orders', {
-      id: '1a2b3c',
+      id: 'd9dd7031-cacf-44db-ae70-53f5548d3615',
       healthCareDistrict: 'TYKS', 
       orderNumber: 456,
       responsiblePerson: 'Lumi Virta', 
       injections: 3,
-      arrived: null,
+      arrived: '2021-04-08T07:17:53.696013Z',
       vaccine: 'antiqua'
     })
 })

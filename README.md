@@ -51,7 +51,11 @@ Frontend and backend can be stopped with Ctrl+c. Note that the database needs to
 
 ## Run tests
 
-Tests can be run with:
+Backend integration tests: use the following command in the **backend catalogue**:
+
+`npm run test`
+
+Frontend unit tests: use the following command in the **frontend catalogue**:
 
 `npm run test`
 
