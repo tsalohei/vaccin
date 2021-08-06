@@ -49,13 +49,17 @@ Close the database using:
 
 Frontend and backend can be stopped with Ctrl+c. Note that the database needs to be initialized again if the program is closed.
 
-## Run tests
+## Tests
 
-Backend integration tests: use the following command in the **backend catalogue**:
+### Backend integration tests
+
+Use the following command in the backend catalogue:
 
 `npm run test`
 
-Frontend unit tests: use the following command in the **frontend catalogue**:
+### Frontend unit tests
+
+Use the following command in the frontend catalogue:
 
 `npm run test`
 
