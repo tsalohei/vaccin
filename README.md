@@ -2,7 +2,7 @@
 
 ## Technology choices
 - React
-- Node.js, Express.js
+- Node.js
 - PostgreSQL with Docker
 
 ## Using the application
