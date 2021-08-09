@@ -63,6 +63,14 @@ Use the following command in the frontend catalogue:
 
 `npm run test`
 
+### End-to-end tests
+
+Start the application (frontend, backend) before running Cypress end-to-end tests. Then, use the following command in the frontend catalogue: 
+
+`npm run cypress:open`
+
+A chrome window opens for running the tests in browser.
+
 ## Backend API
 
 | Endpoint        | Method | Description                       |
