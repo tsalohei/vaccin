@@ -4,10 +4,11 @@
 - React
 - Node.js
 - PostgreSQL with Docker
+- Sequelize as ORM
 
 ## Using the application
 
-Frontend and backend are in their own subcatalogues. PostgreSQL database is run in a Docker container.
+The application can be used in a Unix environment.
 
 First, clone the project. Then open three tabs in the terminal. Open the frontend catalogue in the first, backend catalogue in the second, and root of the project in the third.
 
@@ -55,7 +56,7 @@ Frontend and backend can be stopped with Ctrl+c. Note that the database needs to
 
 Use the following command in the backend catalogue:
 
-`npm run test`
+`npm test`
 
 ### Frontend unit tests
 
@@ -65,7 +66,7 @@ Use the following command in the frontend catalogue:
 
 ### End-to-end tests
 
-Start the application (frontend, backend) before running Cypress end-to-end tests. Then, use the following command in the frontend catalogue: 
+Start the application before running Cypress end-to-end tests. Then, use the following command in the frontend catalogue: 
 
 `npm run cypress:open`
 

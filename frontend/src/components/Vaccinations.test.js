@@ -20,7 +20,7 @@ describe('Vaccinations', () => {
     )
   
     expect(component.container).toHaveTextContent(
-      'Total amount of vaccinations: 1'
+      'Total amount of vaccinations injected by selected date: 1'
     )
   })
 })

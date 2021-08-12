@@ -23,7 +23,7 @@ describe('Orders', () => {
     )
   
     expect(component.container).toHaveTextContent(
-      'Total amount of orders (bottles): 1'
+      'Total amount of orders (bottles) arrived by selected date: 1'
     )
   })
 })
