@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 
 import DateFilter from './components/DateFilter'
 import Orders from './components/Orders'
+import Doses from './components/Doses'
 import Vaccinations from './components/Vaccinations'
 import dataService from './services/dataService'
 
 const App = () => {
   const [orders, setOrders] = useState([])
+  const [doses, setDoses] = useState(null)
   const [vaccinations, setVaccinations] = useState([])
   const [endDate, setEndDate] = useState(new Date())
   
@@ -16,6 +18,7 @@ const App = () => {
 
     const fetchData = async () => {
       dataService(`orders?date=${endDate.getTime()}`).then(response => setOrders(response))
+      dataService(`doses?date=${endDate.getTime()}`).then(response => setDoses(response))
       dataService(`vaccinations?date=${endDate.getTime()}`).then(response => setVaccinations(response))
     }    
 
@@ -28,6 +31,7 @@ const App = () => {
       <h1>Vaccine orders and vaccinations</h1>  
       <DateFilter setEndDate={setEndDate} endDate={endDate}/>
       <Orders orders={orders}/>
+      <Doses doses={doses}/>
       <Vaccinations vaccinations={vaccinations}/>
     </div>
   )

@@ -18,6 +18,20 @@ const findAllOrders = async (dateMsec) => {
   return orders
 }
 
+const findAllDoses = async (dateMsec) => {    
+  const orders = await all_orders.findAll({
+    where: {
+      arrived: {
+        [Op.lte]: new Date(parseInt(dateMsec)) 
+      } 
+    }
+  })
+
+  let doses = 0
+  orders.forEach(order => doses = doses + order.injections)
+
+  return doses
+}
 
 const findAllVaccinations = async (dateMsec) => {  
   console.log('VACCINATION DATE')
@@ -35,5 +49,6 @@ const findAllVaccinations = async (dateMsec) => {
 
 module.exports = {
   findAllOrders,
+  findAllDoses,
   findAllVaccinations
 }

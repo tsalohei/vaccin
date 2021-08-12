@@ -11,13 +11,17 @@ describe('App', () => {
     expect(component.container).toHaveTextContent(
       'Vaccine orders and vaccinations')
 
-      expect(component.container).toHaveTextContent(
-        'Select end date to filter data'
-      ) 
+    expect(component.container).toHaveTextContent(
+      'Select end date to filter data'
+    ) 
     
-      expect(component.container).toHaveTextContent(
+    expect(component.container).toHaveTextContent(
       'Total amount of orders (bottles) arrived by selected date'
-    )  
+    ) 
+    
+    expect(component.container).toHaveTextContent(
+      'Total amount of vaccine doses arrived by selected date (one bottle has many doses)'
+    ) 
       
     expect(component.container).toHaveTextContent(
       'Total amount of vaccinations injected by selected date'

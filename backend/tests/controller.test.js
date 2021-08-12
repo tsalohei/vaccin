@@ -32,6 +32,13 @@ describe('orders', () => {
   })
 })  
 
+describe('doses', () => {
+  it('can be calculated from database', async () => {
+    const doses = await controller.findAllDoses(1628726400000)
+    expect(doses).toEqual(3)
+  })
+})
+
 jest.mock('../models/vaccinations', () => () => {
   const SequelizeMock = require('sequelize-mock')
   const dbMock = new SequelizeMock()
