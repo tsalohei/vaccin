@@ -10,3 +10,12 @@ h1 {
   padding-top: 1em;
   color: #333;
 }
+
+.date-picker p {
+  float: left;
+}
+
+.date-picker .react-date-picker {
+  margin-left: 8px;
+  margin-top: 12px;
+}

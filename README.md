@@ -75,5 +75,5 @@ A chrome window opens for running the tests in browser.
 
 | Endpoint        | Method | Description                       |
 |-----------------|--------|-----------------------------------|
-| /api/orders | GET    | Returns all orders. |
-| /api/vaccinations      | GET    | Returns all vaccinations.      |
+| /api/orders?date=queryparameter | GET    | Returns all orders arrived before specified date (epoch time). |
+| /api/vaccinations?date=queryparameter     | GET    | Returns all vaccinations injected before specified date (epoch time).      |
