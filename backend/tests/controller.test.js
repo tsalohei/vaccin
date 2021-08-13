@@ -34,7 +34,7 @@ describe('orders', () => {
 
 describe('doses', () => {
   it('can be calculated from database', async () => {
-    const doses = await controller.findAllDoses(1628726400000)
+    const doses = await controller.findAllDoses(1628726400000, 'antiqua')
     expect(doses).toEqual(3)
   })
 })

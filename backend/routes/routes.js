@@ -11,7 +11,7 @@ router.get('/orders', async (request, response) => {
 })
 
 router.get('/doses', async (request, response) => {
-  const doses = await controller.findAllDoses(request.query.date)
+  const doses = await controller.findAllDoses(request.query.date, request.query.producer)
   response.json(doses)
 })
 

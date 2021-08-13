@@ -13,14 +13,12 @@ const App = () => {
   const [vaccinations, setVaccinations] = useState([])
   const [endDate, setEndDate] = useState(new Date())
   const [producer, setProducer] = useState({value: "all", label: "All"})
-  
-  //console.log(endDate)
 
   useEffect(() => {
 
     const fetchData = async () => {
       dataService(`orders?date=${endDate.getTime()}&producer=${producer['value']}`).then(response => setOrders(response))
-      dataService(`doses?date=${endDate.getTime()}`).then(response => setDoses(response))
+      dataService(`doses?date=${endDate.getTime()}&producer=${producer['value']}`).then(response => setDoses(response))
       dataService(`vaccinations?date=${endDate.getTime()}`).then(response => setVaccinations(response))
     }    
 

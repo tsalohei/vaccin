@@ -5,16 +5,10 @@ const all_orders = db.orders
 const all_vaccinations = db.vaccinations
 
 const findAllOrders = async (dateMsec, producer) => {    
-  //console.log('ORDER DATE')
-  //console.log(new Date(parseInt(dateMsec)))
-  //console.log('PRODUCER RECEIVED IN BACKEND')
-  //console.log(producer)
-
   str = '%'
   producerMatch = str.concat(producer)
   
   if (producer == 'all') {
-    //console.log('ALL WAS ASKED')
     const orders = await all_orders.findAll({
       where: {
         arrived: {
@@ -24,7 +18,6 @@ const findAllOrders = async (dateMsec, producer) => {
     })
     return orders
   } else {
-    //console.log('SPECIFIED PRODUCER WAS ASKED;', producer)
     const orders = await all_orders.findAll({
       where: {
         arrived: {
@@ -39,15 +32,8 @@ const findAllOrders = async (dateMsec, producer) => {
   }
 }
 
-const findAllDoses = async (dateMsec) => {    
-  const orders = await all_orders.findAll({
-    where: {
-      arrived: {
-        [Op.lte]: new Date(parseInt(dateMsec)) 
-      } 
-    }
-  })
-
+const findAllDoses = async (dateMsec, producer) => {   
+  const orders = await findAllOrders(dateMsec, producer)
   let doses = 0
   orders.forEach(order => doses = doses + order.injections)
 
@@ -55,9 +41,6 @@ const findAllDoses = async (dateMsec) => {
 }
 
 const findAllVaccinations = async (dateMsec) => {  
-  //console.log('VACCINATION DATE')
-  //console.log(new Date(parseInt(dateMsec)))
-
   const vaccinations = await all_vaccinations.findAll({
     where: {
       injected: {
