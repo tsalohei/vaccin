@@ -31,8 +31,10 @@ const App = () => {
   return (
     <div>
       <h1>Vaccine orders and vaccinations</h1>  
+      <h2>Filters</h2>
       <DateFilter setEndDate={setEndDate} endDate={endDate}/>
       <ProducerFilter setProducer={setProducer} producer={producer}/>
+      <h2>Data</h2>
       <Orders orders={orders}/>
       <Doses doses={doses}/>
       <Vaccinations vaccinations={vaccinations}/>

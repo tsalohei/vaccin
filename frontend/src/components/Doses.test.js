@@ -13,7 +13,7 @@ describe('Doses', () => {
     )
   
     expect(component.container).toHaveTextContent(
-      'Total amount of vaccine doses arrived by selected date (one bottle has many doses): 4'
+      'Total amount of vaccine doses (one bottle has many doses) arrived by selected date and producer: 4'
     )
   })
 })
