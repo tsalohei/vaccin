@@ -19,3 +19,14 @@ h1 {
   margin-left: 8px;
   margin-top: 12px;
 }
+
+.react-dropdown p {
+  float: left;
+}
+
+
+.react-dropdown .Dropdown-root {
+  margin-left: 210px;
+  margin-top: 15px;
+  width: 10em;
+}

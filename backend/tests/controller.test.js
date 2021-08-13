@@ -26,7 +26,7 @@ jest.mock('../models/orders', () => () => {
 
 describe('orders', () => {
   it('can be found from database', async () => {
-    const orders = await controller.findAllOrders(1628726400000)
+    const orders = await controller.findAllOrders(1628726400000, 'antiqua')
     expect(orders.length).toEqual(1)
     expect(orders[0].responsiblePerson).toEqual('Lumi Virta')
   })

@@ -4,18 +4,39 @@ const { Op } = require("sequelize")
 const all_orders = db.orders
 const all_vaccinations = db.vaccinations
 
-const findAllOrders = async (dateMsec) => {    
-  console.log('ORDER DATE')
-  console.log(new Date(parseInt(dateMsec)))
+const findAllOrders = async (dateMsec, producer) => {    
+  //console.log('ORDER DATE')
+  //console.log(new Date(parseInt(dateMsec)))
+  //console.log('PRODUCER RECEIVED IN BACKEND')
+  //console.log(producer)
 
-  const orders = await all_orders.findAll({
-    where: {
-      arrived: {
-        [Op.lte]: new Date(parseInt(dateMsec)) 
-      } 
-    }
-  })
-  return orders
+  str = '%'
+  producerMatch = str.concat(producer)
+  
+  if (producer == 'all') {
+    //console.log('ALL WAS ASKED')
+    const orders = await all_orders.findAll({
+      where: {
+        arrived: {
+          [Op.lte]: new Date(parseInt(dateMsec)) 
+        } 
+      }
+    })
+    return orders
+  } else {
+    //console.log('SPECIFIED PRODUCER WAS ASKED;', producer)
+    const orders = await all_orders.findAll({
+      where: {
+        arrived: {
+          [Op.lte]: new Date(parseInt(dateMsec)) 
+        },
+        vaccine: {
+          [Op.iLike]: producerMatch
+        } 
+      }
+    })
+    return orders
+  }
 }
 
 const findAllDoses = async (dateMsec) => {    
@@ -34,8 +55,8 @@ const findAllDoses = async (dateMsec) => {
 }
 
 const findAllVaccinations = async (dateMsec) => {  
-  console.log('VACCINATION DATE')
-  console.log(new Date(parseInt(dateMsec)))
+  //console.log('VACCINATION DATE')
+  //console.log(new Date(parseInt(dateMsec)))
 
   const vaccinations = await all_vaccinations.findAll({
     where: {

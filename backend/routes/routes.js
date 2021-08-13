@@ -6,13 +6,12 @@ router.get('/', (request, response) => {
 })
 
 router.get('/orders', async (request, response) => {
-  const orders = await controller.findAllOrders(request.query.date)
+  const orders = await controller.findAllOrders(request.query.date, request.query.producer)
   response.json(orders)
 })
 
 router.get('/doses', async (request, response) => {
   const doses = await controller.findAllDoses(request.query.date)
-  //tää kannattaisi varmaan olla integer eikä json kun luku tulee suoraan
   response.json(doses)
 })
 

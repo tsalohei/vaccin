@@ -9,8 +9,6 @@ app.use(cors())
 const apiUrl = '/api'
 app.use(apiUrl, router)
 
-
-
 const unknownEndpoint = (request, response, next) => {
     response.status(404).send({ error: 'unknown endpoint' })
 }  

@@ -62,7 +62,7 @@ Use the following command in the backend catalogue:
 
 Use the following command in the frontend catalogue:
 
-`npm run test`
+`npm run test` (and press a to run all tests)
 
 ### End-to-end tests
 
@@ -76,5 +76,6 @@ A chrome window opens for running the tests in browser.
 
 | Endpoint        | Method | Description                       |
 |-----------------|--------|-----------------------------------|
-| /api/orders?date=queryparameter | GET    | Returns all orders arrived before specified date (epoch time). |
-| /api/vaccinations?date=queryparameter     | GET    | Returns all vaccinations injected before specified date (epoch time).      |
+| /api/orders?date=value&producer=value | GET    | Returns all orders arrived before specified date (epoch time), from specified producer. |
+| /api/doses?date=value&producer=value | GET    | Returns all doses before specified date (epoch time), from specified producer  |
+| /api/vaccinations?date=value&producer=value     | GET    | Returns all vaccinations injected before specified date, from specified producer (epoch time).      |
