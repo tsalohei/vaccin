@@ -4,10 +4,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       primaryKey: true
     },  
-      gender: DataTypes.STRING,
-      sourceBottle: DataTypes.UUID,
-      injected: DataTypes.DATE
+    gender: DataTypes.STRING,
+    sourceBottle: DataTypes.UUID,
+    injected: DataTypes.DATE
     },  {
-        timestamps: false
+    timestamps: false
   })
 }

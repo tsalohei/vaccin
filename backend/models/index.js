@@ -21,4 +21,7 @@ db.Sequelize = Sequelize
 db.orders = require('../models/orders')(sequelize, Sequelize)
 db.vaccinations = require('../models/vaccinations')(sequelize, Sequelize)
 
+db.orders.hasMany(db.vaccinations)
+db.vaccinations.belongsTo(db.orders, { foreignKey: 'sourceBottle' })
+
 module.exports = db

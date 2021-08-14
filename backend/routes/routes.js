@@ -16,7 +16,7 @@ router.get('/doses', async (request, response) => {
 })
 
 router.get('/vaccinations', async (request, response) => {
-  const vaccinations = await controller.findAllVaccinations(request.query.date)
+  const vaccinations = await controller.findAllVaccinations(request.query.date, request.query.producer)
   response.json(vaccinations)
 })
 

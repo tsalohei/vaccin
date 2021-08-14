@@ -19,7 +19,7 @@ const App = () => {
     const fetchData = async () => {
       dataService(`orders?date=${endDate.getTime()}&producer=${producer['value']}`).then(response => setOrders(response))
       dataService(`doses?date=${endDate.getTime()}&producer=${producer['value']}`).then(response => setDoses(response))
-      dataService(`vaccinations?date=${endDate.getTime()}`).then(response => setVaccinations(response))
+      dataService(`vaccinations?date=${endDate.getTime()}&producer=${producer['value']}`).then(response => setVaccinations(response))
     }    
 
     fetchData()
