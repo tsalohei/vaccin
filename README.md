@@ -64,7 +64,7 @@ Use the following command in the backend catalogue:
 
 Use the following command in the frontend catalogue:
 
-`npm run test` (and press a to run all tests)
+`npm run test` (and press `a` to run all tests)
 
 ### End-to-end tests
 
