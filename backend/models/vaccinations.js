@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     gender: DataTypes.STRING,
     sourceBottle: DataTypes.UUID,
     injected: DataTypes.DATE
-    },  {
+  },  
+  {
     timestamps: false
   })
 }

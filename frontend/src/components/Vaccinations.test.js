@@ -16,7 +16,7 @@ describe('Vaccinations', () => {
     ]
   
     const component = render(
-      <Vaccinations vaccinations={vaccinations} />
+      <Vaccinations vaccinations={ vaccinations } />
     )
   
     expect(component.container).toHaveTextContent(

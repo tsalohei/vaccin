@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     injections: DataTypes.INTEGER,
     arrived: DataTypes.DATE,
     vaccine: DataTypes.STRING,
-    },  {
+  },  
+  {
     timestamps: false
   })
 }

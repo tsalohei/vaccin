@@ -7,9 +7,9 @@ const dataService = async (endpoint) => {
     const response = await axios.get(endpoint)
     return response.data
   } catch (error) {
-      if (error.message.includes('403')) {
-        return 403
-      }
+    if (error.message.includes('403')) {
+      return 403
+    }
     return []
   }
 }

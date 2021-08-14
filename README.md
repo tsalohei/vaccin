@@ -7,6 +7,7 @@ This application presents data on vaccine orders and vaccinations. Data can be f
 - Node.js
 - PostgreSQL with Docker
 - Sequelize as ORM
+- Express as backend web framework
 
 ## Using the application
 
