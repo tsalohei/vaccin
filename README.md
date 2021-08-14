@@ -8,7 +8,7 @@
 
 ## Using the application
 
-The application can be used in a Unix environment.
+The application can be used in a Unix environment. You will also need Docker.
 
 First, clone the project. Then open three tabs in the terminal. Open the frontend catalogue in the first, backend catalogue in the second, and root of the project in the third.
 
