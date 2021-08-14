@@ -1,5 +1,7 @@
 # Vaccine application
 
+This application presents data on vaccine orders and vaccinations. Data can be filtered by date and producer. Have a look at a demo video (here)[https://github.com/tsalohei/vaccine/blob/master/videos/demo_vaccine.mov].
+
 ## Technology choices
 - React
 - Node.js
